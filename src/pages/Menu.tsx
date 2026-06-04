@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { products, portfolioItems } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { Cake, Sparkles, Check, ShoppingBag, Eye } from 'lucide-react';
+import { ScrollReveal } from '../components/ScrollReveal';
 
 export const Menu = () => {
   const { addToCart } = useCart();
@@ -73,28 +74,29 @@ export const Menu = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Header */}
-        <div className="text-center max-w-xl mx-auto mb-12">
+        <ScrollReveal className="text-center max-w-xl mx-auto mb-12">
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark mb-4">
             Nosso Cardápio Interativo
           </h1>
           <p className="text-stone-500 text-sm leading-relaxed">
             Confira as fotos de nossos trabalhos reais e use o configurador exclusivo para montar o bolo dos seus sonhos!
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* 1. PORTFOLIO / GALLERY */}
         <section className="mb-20">
-          <div className="flex items-center gap-3 mb-8 justify-center">
+          <ScrollReveal className="flex items-center gap-3 mb-8 justify-center">
             <Sparkles className="w-6 h-6 text-brand-primary" />
             <h2 className="font-serif text-2xl md:text-3xl font-bold text-brand-dark">
               Nosso Trabalho (Inspirações Reais)
             </h2>
-          </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioItems.map((item) => (
-              <div
+            {portfolioItems.map((item, idx) => (
+              <ScrollReveal
                 key={item.id}
+                delay={(idx % 3) * 100}
                 className="bg-white border border-stone-100 rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col group relative"
               >
                 {/* Photo container */}
@@ -123,13 +125,13 @@ export const Menu = () => {
                     {item.description}
                   </p>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </section>
 
         {/* 2. CUSTOM CAKE BUILDER FORM */}
-        <section id="monte-seu-bolo" className="bg-white rounded-3xl border border-stone-100 shadow-sm p-6 md:p-10 lg:p-12">
+        <ScrollReveal id="monte-seu-bolo" className="bg-white rounded-3xl border border-stone-100 shadow-sm p-6 md:p-10 lg:p-12 mb-12 block">
           
           <div className="flex flex-col lg:flex-row gap-12">
             
@@ -364,7 +366,7 @@ export const Menu = () => {
 
           </div>
 
-        </section>
+        </ScrollReveal>
 
       </div>
 

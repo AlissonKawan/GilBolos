@@ -23,13 +23,17 @@ export const Navbar = () => {
       </div>
       <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-pink-100 font-sans transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20">
+        <div className="flex justify-between h-20 md:h-24">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="flex items-center gap-2.5">
-              <img src="/logo.png" alt="Gil Bolos e Doces" className="w-12 h-12 object-contain" />
-              <div className="flex flex-col">
-                <span className="font-serif text-xl font-bold tracking-tight text-brand-dark hover:text-brand-primary transition-colors leading-none">
+            <Link to="/" className="flex items-center gap-3 group">
+              <img
+                src="/logo.png"
+                alt="Gil Bolos e Doces"
+                className="w-12 h-12 md:w-16 md:h-16 object-contain rounded-full shadow-md border border-pink-100 bg-white hover:scale-105 transition-transform duration-300"
+              />
+              <div className="flex flex-col text-left">
+                <span className="font-serif text-lg font-bold tracking-tight text-brand-dark hover:text-brand-primary transition-colors leading-none">
                   Gil Bolos e Doces
                 </span>
                 <span className="text-[9px] tracking-widest uppercase font-semibold text-brand-gold mt-1 pl-0.5">

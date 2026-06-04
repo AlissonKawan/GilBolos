@@ -65,7 +65,7 @@ export const Footer = () => {
             <ul className="space-y-3.5 text-sm text-stone-300">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-pink-300 shrink-0 mt-0.5" />
-                <span>Rua das Confeitarias, 123 - Centro, São Paulo - SP</span>
+                <span>Rua Maranjaí, 671 - Vila Monumento, São Paulo - SP</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-pink-300 shrink-0" />
