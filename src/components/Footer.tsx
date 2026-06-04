@@ -43,7 +43,7 @@ export const Footer: React.FC = () => {
                 </svg>
               </a>
               <a
-                href="https://wa.me/5511999999999"
+                href="https://wa.me/5511951907323"
                 target="_blank"
                 rel="noreferrer"
                 className="p-2 bg-white/10 hover:bg-emerald-600 text-white rounded-full transition-all duration-200"
@@ -66,7 +66,7 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-pink-300 shrink-0" />
-                <span>(11) 99999-9999</span>
+                <span>(11) 95190-7323</span>
               </li>
               <li className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-pink-300 shrink-0" />

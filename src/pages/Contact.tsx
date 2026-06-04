@@ -18,7 +18,7 @@ export const Contact: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const recipientPhone = '5511999999999'; // Número fictício de exemplo (Brasil)
+    const recipientPhone = '5511951907323'; // Número atualizado da Gil Bolos e Doces
     
     // Format message
     let message = 'Olá, Gil! Gostaria de fazer um orçamento de encomenda personalizada:\n\n';
@@ -66,12 +66,12 @@ export const Contact: React.FC = () => {
                 <h3 className="font-serif font-bold text-stone-850 text-base">WhatsApp Direto</h3>
                 <p className="text-stone-500 text-xs mt-1">Converse conosco e tire dúvidas.</p>
                 <a
-                  href="https://wa.me/5511999999999"
+                  href="https://wa.me/5511951907323"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-block mt-3 text-emerald-600 hover:text-emerald-700 font-semibold text-sm transition-colors"
                 >
-                  (11) 99999-9999
+                  (11) 95190-7323
                 </a>
               </div>
             </div>

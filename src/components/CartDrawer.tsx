@@ -8,14 +8,16 @@ export const CartDrawer: React.FC = () => {
   if (!isOpen) return null;
 
   const handleSendWhatsApp = () => {
-    const phone = '5511999999999'; // Número fictício de exemplo (Brasil)
+    const phone = '5511951907323'; // Número atualizado da Gil Bolos e Doces
     let message = 'Olá! Gostaria de encomendar os seguintes itens da *Gil Bolos e Doces*:\n\n';
 
     cartItems.forEach((item) => {
+      const sizeOpt = item.product.sizes.find((s) => s.name === item.selectedSize);
+      const itemPrice = sizeOpt ? sizeOpt.price : item.product.price;
       message += `🍰 *${item.product.name}*\n`;
       message += `   - Quantidade: ${item.quantity}\n`;
       message += `   - Opção/Tamanho: ${item.selectedSize}\n`;
-      message += `   - Subtotal: R$ ${(item.product.price * item.quantity).toFixed(2)}\n\n`;
+      message += `   - Subtotal: R$ ${(itemPrice * item.quantity).toFixed(2)}\n\n`;
     });
 
     message += `💰 *Total Estimado: R$ ${cartTotal.toFixed(2)}*\n\n`;
@@ -81,7 +83,7 @@ export const CartDrawer: React.FC = () => {
                     </h4>
                     <p className="text-xs text-stone-500 mt-0.5">Opção: {item.selectedSize}</p>
                     <p className="text-sm font-semibold text-brand-primary mt-1">
-                      R$ {item.product.price.toFixed(2)}
+                      R$ {(item.product.sizes.find(s => s.name === item.selectedSize)?.price ?? item.product.price).toFixed(2)}
                     </p>
 
                     <div className="flex items-center justify-between mt-3">

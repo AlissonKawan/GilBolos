@@ -32,7 +32,7 @@ export const ProductDetail: React.FC = () => {
     );
   }
 
-  const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0]);
+  const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0].name);
   const [quantity, setQuantity] = useState<number>(1);
 
   const handleAdd = () => {
@@ -80,7 +80,7 @@ export const ProductDetail: React.FC = () => {
                 {product.name}
               </h1>
               <p className="text-2xl font-bold text-brand-primary">
-                R$ {product.price.toFixed(2)}
+                R$ {(product.sizes.find(s => s.name === selectedSize)?.price ?? product.price).toFixed(2)}
               </p>
               <p className="text-stone-650 text-sm leading-relaxed">
                 {product.longDescription}
@@ -95,15 +95,16 @@ export const ProductDetail: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {product.sizes.map((size) => (
                   <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`p-3.5 text-left border rounded-xl text-xs font-semibold tracking-wide transition-all ${
-                      selectedSize === size
+                    key={size.name}
+                    onClick={() => setSelectedSize(size.name)}
+                    className={`p-3.5 text-left border rounded-xl text-xs font-semibold tracking-wide transition-all flex flex-col justify-between gap-1.5 ${
+                      selectedSize === size.name
                         ? 'border-brand-primary bg-brand-accent/60 text-brand-dark shadow-xs'
                         : 'border-stone-200 hover:border-pink-200 text-stone-600 hover:bg-stone-50/50'
                     }`}
                   >
-                    {size}
+                    <span className="font-semibold">{size.name}</span>
+                    <span className="text-[11px] font-bold text-brand-primary">R$ {size.price.toFixed(2)}</span>
                   </button>
                 ))}
               </div>

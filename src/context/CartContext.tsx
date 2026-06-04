@@ -74,7 +74,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const cartTotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+  const cartTotal = cartItems.reduce((acc, item) => {
+    const sizeOpt = item.product.sizes.find((s) => s.name === item.selectedSize);
+    const itemPrice = sizeOpt ? sizeOpt.price : item.product.price;
+    return acc + itemPrice * item.quantity;
+  }, 0);
 
   return (
     <CartContext.Provider

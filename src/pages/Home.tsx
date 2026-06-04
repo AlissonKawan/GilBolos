@@ -182,7 +182,7 @@ export const Home: React.FC = () => {
                         Detalhes
                       </Link>
                       <button
-                        onClick={() => addToCart(product, product.sizes[0], 1)}
+                        onClick={() => addToCart(product, product.sizes[0].name, 1)}
                         className="bg-brand-primary hover:bg-brand-secondary text-white p-2.5 rounded-xl transition-colors shadow-xs"
                         aria-label={`Adicionar ${product.name} à sacola`}
                       >
