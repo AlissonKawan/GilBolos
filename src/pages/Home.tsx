@@ -1,26 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { portfolioItems } from '../data/products';
-import { Award, ShieldCheck, HeartHandshake, Star, ArrowRight, Eye, Cake } from 'lucide-react';
+import { Award, ShieldCheck, HeartHandshake, ArrowRight, Eye, Cake } from 'lucide-react';
 import { ScrollReveal } from '../components/ScrollReveal';
 
 export const Home = () => {
-  // Testimonials
-  const testimonials = [
-    {
-      name: 'Mariana Silva',
-      role: 'Aniversariante',
-      text: 'O Bolo de Morango Gourmet foi o grande destaque da minha festa! Super molhadinho, doce na medida certa e os morangos estavam incrivelmente frescos. Todo mundo elogiou.',
-      rating: 5,
-    },
-    {
-      name: 'Carlos Oliveira',
-      role: 'Casamento',
-      text: 'Encomendamos o Naked Cake rústico para o nosso casamento. O visual estava simplesmente impecável e o recheio de damasco com ganache de chocolate branco foi muito elogiado por todos!',
-      rating: 5,
-    },
-  ];
-
   // State for image zoom modal
   const [zoomImage, setZoomImage] = useState<string | null>(null);
 
@@ -215,48 +199,11 @@ export const Home = () => {
                   </div>
                   
                   <Link
-                    to="/cardapio"
+                    to="/cardapio#monte-seu-bolo"
                     className="w-full text-center bg-brand-accent hover:bg-brand-accent-hover text-brand-primary font-semibold py-2.5 rounded-xl text-xs transition-colors"
                   >
                     Personalizar Bolo Semelhante
                   </Link>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-16 md:py-20 bg-white border-t border-stone-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal className="text-center max-w-xl mx-auto mb-12">
-            <h2 className="font-serif text-3xl font-bold text-brand-dark mb-4">
-              Quem Provou, Amou!
-            </h2>
-            <p className="text-stone-500 text-sm">
-              Confira os depoimentos de nossos clientes apaixonados.
-            </p>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {testimonials.map((t, idx) => (
-              <ScrollReveal
-                key={idx}
-                delay={idx * 150}
-                className="bg-stone-50 border border-stone-100/50 p-8 rounded-2xl space-y-4 hover:shadow-md transition-shadow relative"
-              >
-                <div className="flex text-amber-500 gap-0.5">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-500" />
-                  ))}
-                </div>
-                <p className="text-stone-600 text-sm italic leading-relaxed">
-                  "{t.text}"
-                </p>
-                <div>
-                  <h4 className="font-semibold text-stone-800 text-sm">{t.name}</h4>
-                  <p className="text-xs text-stone-400 mt-0.5">{t.role}</p>
                 </div>
               </ScrollReveal>
             ))}
