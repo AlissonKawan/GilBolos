@@ -11,8 +11,8 @@ export const Menu = () => {
   // State for the cake configurator
   const [sizeOption, setSizeOption] = useState(baseProduct.sizes[0]); // Default to Fatia
   const [massa, setMassa] = useState('Branca (Baunilha)');
-  const [recheios, setRecheios] = useState<string[]>(['Creme de Leite Ninho']);
-  const [cobertura, setCobertura] = useState('Chantilly Tradicional');
+  const [recheios, setRecheios] = useState<string[]>(['Brigadeiro']);
+  const [cobertura, setCobertura] = useState('Chantily');
   const [decoracao, setDecoracao] = useState('Morangos Frescos');
   const [quantity, setQuantity] = useState(1);
   const isFatia = sizeOption.name.includes('Fatia');
@@ -23,9 +23,13 @@ export const Menu = () => {
   const [simpleFlavor, setSimpleFlavor] = useState('Cenoura');
   const [simpleOption, setSimpleOption] = useState(simpleProduct.sizes[0]);
   const [simpleQuantity, setSimpleQuantity] = useState(1);
+  const [simpleCoverage, setSimpleCoverage] = useState('Chantily');
 
   const handleAddSimpleCake = () => {
-    const selectionString = `${simpleOption.name} (Sabor: ${simpleFlavor})`;
+    const isWithCoverage = simpleOption.name.includes('Com Cobertura') || simpleOption.name.includes('com Cobertura');
+    const selectionString = isWithCoverage
+      ? `${simpleOption.name} (Sabor: ${simpleFlavor}, Cobertura: ${simpleCoverage})`
+      : `${simpleOption.name} (Sabor: ${simpleFlavor})`;
     addToCart(simpleProduct, selectionString, simpleQuantity);
   };
 
@@ -47,11 +51,13 @@ export const Menu = () => {
     'Brigadeiro Trufado com Chocolate'
   ];
   const coberturas = [
-    'Chantilly Tradicional',
-    'Ganache de Chocolate Meio Amargo',
-    'Cream Cheese Frosting (Cítrico)',
+    'Chantily',
+    'Chantininho',
+    'Choconinho',
+    'Ganache',
     'Naked Cake (Sem Cobertura)'
   ];
+  const coberturasSimples = ['Chantily', 'Chantininho', 'Choconinho', 'Ganache'];
   const decoracoes = [
     'Morangos Frescos',
     'Raspas de Chocolate Nobre',
@@ -242,6 +248,35 @@ export const Menu = () => {
                       ))}
                     </div>
                   </div>
+
+                  {/* Option 3: Sabor da Cobertura (Apenas se a opção for Com Cobertura) */}
+                  {(simpleOption.name.includes('Cobertura') || simpleOption.name.includes('cobertura')) ? (
+                    <div className="space-y-3 animate-fade-in">
+                      <span className="block text-xs font-bold uppercase tracking-wider text-stone-500">
+                        Sabor da Cobertura Vulcão:
+                      </span>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                        {coberturasSimples.map((cov) => (
+                          <button
+                            key={cov}
+                            type="button"
+                            onClick={() => setSimpleCoverage(cov)}
+                            className={`py-2.5 px-2 text-center border rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                              simpleCoverage === cov
+                                ? 'border-brand-primary bg-brand-accent/50 text-brand-dark font-bold'
+                                : 'border-stone-200 hover:border-pink-200 text-stone-600 hover:bg-stone-50/50'
+                            }`}
+                          >
+                            {cov}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="p-4 bg-stone-100 rounded-xl border border-stone-200/60 text-xs text-stone-550 leading-normal">
+                      ℹ️ Este bolo será preparado de forma tradicional caseira, macio e fofinho, **sem qualquer tipo de cobertura ou calda**.
+                    </div>
+                  )}
 
                   {/* Bottom: Quantity, Price, Add Button */}
                   <div className="pt-6 border-t border-stone-100 flex flex-col sm:flex-row gap-6 items-center justify-between">
