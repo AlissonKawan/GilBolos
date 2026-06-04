@@ -1,14 +1,10 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { products } from '../data/products';
-import { useCart } from '../context/CartContext';
-import { Award, ShieldCheck, HeartHandshake, Star, ArrowRight, ShoppingBag, Cake } from 'lucide-react';
+import { portfolioItems } from '../data/products';
+import { Award, ShieldCheck, HeartHandshake, Star, ArrowRight, Eye, Cake } from 'lucide-react';
 
 export const Home = () => {
-  const { addToCart } = useCart();
-  
-  // Showcase all available cakes
-  const featuredProducts = products;
-
+  // Testimonials
   const testimonials = [
     {
       name: 'Mariana Silva',
@@ -23,6 +19,9 @@ export const Home = () => {
       rating: 5,
     },
   ];
+
+  // State for image zoom modal
+  const [zoomImage, setZoomImage] = useState<string | null>(null);
 
   return (
     <div className="font-sans overflow-x-hidden">
@@ -45,7 +44,7 @@ export const Home = () => {
                 to="/cardapio"
                 className="bg-brand-primary hover:bg-brand-secondary text-white font-semibold py-3.5 px-8 rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all duration-200"
               >
-                <span>Ver Cardápio de Bolos</span>
+                <span>Monte Seu Bolo Aqui</span>
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
@@ -62,7 +61,7 @@ export const Home = () => {
             {/* Soft background shape decoration */}
             <div className="absolute -inset-4 bg-pink-200/40 rounded-full blur-2xl -z-10" />
             <img
-              src="/images/strawberry_cake.png"
+              src="/images/portfolio/bolo_coracoes_laco_preto.png"
               alt="Bolo Gourmet Gil Bolos e Doces"
               className="w-full max-w-md h-[400px] object-cover rounded-3xl shadow-2xl border-4 border-white transform hover:scale-[1.02] transition-transform duration-300"
             />
@@ -149,76 +148,68 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Featured Products */}
+      {/* Featured Portfolio Items */}
       <section className="py-16 md:py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-4">
             <div className="text-center sm:text-left">
               <h2 className="font-serif text-3xl font-bold text-brand-dark mb-2">
-                Nossos Bolos Especiais
+                Nossos Bolos Reais (Exemplos de Trabalhos)
               </h2>
               <p className="text-stone-500 text-sm">
-                Sabores marcantes preparados com muito carinho para adoçar sua vida.
+                Fotos reais de encomendas entregues. Use-os como inspiração e monte o seu!
               </p>
             </div>
             <Link
               to="/cardapio"
-              className="text-brand-primary hover:text-brand-secondary font-semibold flex items-center gap-1 transition-colors text-sm"
+              className="bg-brand-primary hover:bg-brand-secondary text-white text-xs font-semibold py-2.5 px-5 rounded-xl transition-colors flex items-center gap-1.5 shadow-sm"
             >
-              <span>Ver cardápio completo</span>
+              <span>Monte o Seu Bolo</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProducts.map((product) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {portfolioItems.map((item) => (
               <div
-                key={product.id}
-                className="bg-white border border-stone-100 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col"
+                key={item.id}
+                className="bg-white border border-stone-100 rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col group relative"
               >
                 {/* Product Image */}
-                <div className="h-64 overflow-hidden relative group">
+                <div className="h-72 overflow-hidden relative">
                   <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
                   />
-                  <div className="absolute top-4 left-4 bg-brand-primary text-white text-[11px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-md shadow-sm">
-                    Bolos
+                  {/* Zoom Overlay */}
+                  <div
+                    className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300 cursor-pointer"
+                    onClick={() => setZoomImage(item.image)}
+                  >
+                    <div className="p-3 bg-white/20 backdrop-blur-md rounded-full text-white">
+                      <Eye className="w-6 h-6" />
+                    </div>
                   </div>
                 </div>
 
-                {/* Product Content */}
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-xl font-serif font-bold text-stone-800 mb-2 truncate">
-                    {product.name}
-                  </h3>
-                  <p className="text-stone-500 text-sm leading-relaxed mb-4 line-clamp-2">
-                    {product.description}
-                  </p>
-                  
-                  {/* Price & Action */}
-                  <div className="mt-auto pt-4 border-t border-stone-50 flex items-center justify-between">
-                    <div>
-                      <span className="text-xs text-stone-400 block uppercase tracking-wider">Fatia</span>
-                      <span className="text-lg font-bold text-brand-dark">R$ {product.sizes[0].price.toFixed(2)}</span>
-                    </div>
-                    <div className="flex gap-2">
-                      <Link
-                        to={`/produto/${product.id}`}
-                        className="bg-brand-accent hover:bg-brand-accent-hover text-brand-primary font-semibold py-2 px-4 rounded-xl text-xs transition-colors"
-                      >
-                        Detalhes
-                      </Link>
-                      <button
-                        onClick={() => addToCart(product, product.sizes[0].name, 1)}
-                        className="bg-brand-primary hover:bg-brand-secondary text-white p-2.5 rounded-xl transition-colors shadow-xs"
-                        aria-label={`Adicionar ${product.name} à sacola`}
-                      >
-                        <ShoppingBag className="w-4 h-4" />
-                      </button>
-                    </div>
+                {/* Content */}
+                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-serif font-bold text-stone-850 truncate group-hover:text-brand-primary transition-colors">
+                      {item.name}
+                    </h3>
+                    <p className="text-stone-500 text-xs leading-relaxed line-clamp-2">
+                      {item.description}
+                    </p>
                   </div>
+                  
+                  <Link
+                    to="/cardapio"
+                    className="w-full text-center bg-brand-accent hover:bg-brand-accent-hover text-brand-primary font-semibold py-2.5 rounded-xl text-xs transition-colors"
+                  >
+                    Personalizar Bolo Semelhante
+                  </Link>
                 </div>
               </div>
             ))}
@@ -286,6 +277,20 @@ export const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Image Zoom Modal */}
+      {zoomImage && (
+        <div
+          className="fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 cursor-pointer"
+          onClick={() => setZoomImage(null)}
+        >
+          <img
+            src={zoomImage}
+            alt="Ampliação do Bolo"
+            className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl border border-white/10"
+          />
+        </div>
+      )}
     </div>
   );
 };
