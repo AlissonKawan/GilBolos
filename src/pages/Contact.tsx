@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { MapPin, Clock, Send, MessageCircle } from 'lucide-react';
+import { MapPin, Send, MessageCircle, Info } from 'lucide-react';
 
-export const Contact: React.FC = () => {
+export const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -90,19 +90,17 @@ export const Contact: React.FC = () => {
               </div>
             </div>
 
-            {/* Hours Card */}
+            {/* Info Encomenda Card */}
             <div className="bg-white p-6 rounded-2xl border border-stone-100 shadow-xs flex items-start gap-4">
               <div className="p-3 bg-amber-50 text-brand-gold rounded-xl shrink-0">
-                <Clock className="w-6 h-6" />
+                <Info className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-serif font-bold text-stone-850 text-base">Horário de Atendimento</h3>
-                <p className="text-stone-500 text-xs mt-1">Horários para contato e encomendas.</p>
-                <div className="text-stone-650 text-xs mt-3.5 space-y-1.5 font-medium">
-                  <p>Terça a Sexta: 09h às 18h</p>
-                  <p>Sábado: 09h às 19h</p>
-                  <p>Domingo: 09h às 13h</p>
-                </div>
+                <h3 className="font-serif font-bold text-stone-850 text-base">Apenas sob Encomenda</h3>
+                <p className="text-stone-500 text-xs mt-1">Não possuímos loja física ou pronta entrega.</p>
+                <p className="text-stone-650 text-xs mt-3 leading-relaxed font-medium">
+                  Todos os bolos devem ser encomendados com antecedência. A data e hora da retirada são agendadas diretamente pelo WhatsApp.
+                </p>
               </div>
             </div>
 

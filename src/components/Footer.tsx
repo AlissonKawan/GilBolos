@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Phone, Clock, MapPin, Heart } from 'lucide-react';
+import { Phone, MapPin, Heart } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+export const Footer = () => {
   return (
     <footer className="bg-brand-dark text-stone-100 font-sans mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
@@ -9,12 +9,15 @@ export const Footer: React.FC = () => {
           
           {/* Brand Info */}
           <div className="space-y-4">
-            <Link to="/" className="inline-block">
-              <span className="font-serif text-2xl font-bold tracking-tight text-white">
-                Gil Bolos e Doces
-              </span>
-              <div className="text-[10px] tracking-widest uppercase font-semibold text-pink-300 -mt-1">
-                Confeitaria Artesanal
+            <Link to="/" className="flex items-center gap-2.5">
+              <img src="/logo.png" alt="Gil Bolos e Doces" className="w-12 h-12 object-contain bg-white rounded-full p-0.5" />
+              <div className="flex flex-col text-left">
+                <span className="font-serif text-xl font-bold tracking-tight text-white leading-none">
+                  Gil Bolos e Doces
+                </span>
+                <span className="text-[9px] tracking-widest uppercase font-semibold text-pink-300 mt-1">
+                  Confeitaria Artesanal
+                </span>
               </div>
             </Link>
             <p className="text-stone-300 text-sm leading-relaxed max-w-sm">
@@ -22,7 +25,7 @@ export const Footer: React.FC = () => {
             </p>
             <div className="flex gap-4 pt-2">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/gilbolos.doces/"
                 target="_blank"
                 rel="noreferrer"
                 className="p-2 bg-white/10 hover:bg-brand-primary text-white rounded-full transition-all duration-200"
@@ -57,7 +60,7 @@ export const Footer: React.FC = () => {
           {/* Contact Details */}
           <div className="space-y-4">
             <h3 className="text-lg font-serif font-semibold text-white tracking-wide border-b border-white/10 pb-2">
-              Contato & Encomendas
+              Contato & Localização
             </h3>
             <ul className="space-y-3.5 text-sm text-stone-300">
               <li className="flex items-start gap-3">
@@ -68,35 +71,17 @@ export const Footer: React.FC = () => {
                 <Phone className="w-5 h-5 text-pink-300 shrink-0" />
                 <span>(11) 95190-7323</span>
               </li>
-              <li className="flex items-center gap-3">
-                <Clock className="w-5 h-5 text-pink-300 shrink-0" />
-                <span>Atendimento de Terça a Domingo</span>
-              </li>
             </ul>
           </div>
 
-          {/* Opening Hours */}
+          {/* Encomendas Notice */}
           <div className="space-y-4">
             <h3 className="text-lg font-serif font-semibold text-white tracking-wide border-b border-white/10 pb-2">
-              Horários
+              Retiradas & Encomendas
             </h3>
-            <div className="space-y-2.5 text-sm text-stone-300">
-              <div className="flex justify-between">
-                <span>Terça a Sexta:</span>
-                <span className="font-medium text-white">09:00h às 18:00h</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Sábado:</span>
-                <span className="font-medium text-white">09:00h às 19:00h</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Domingo:</span>
-                <span className="font-medium text-white">09:00h às 13:00h</span>
-              </div>
-              <div className="flex justify-between text-stone-400 text-xs pt-1.5">
-                <span>* Retiradas agendadas no local.</span>
-              </div>
-            </div>
+            <p className="text-stone-300 text-sm leading-relaxed">
+              Todos os nossos bolos são produzidos de forma 100% artesanal e <strong>exclusivamente sob encomenda</strong>. Por favor, realize o seu pedido com antecedência pelo WhatsApp e agende a sua retirada ou entrega!
+            </p>
           </div>
 
         </div>

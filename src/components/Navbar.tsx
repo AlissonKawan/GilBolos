@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 
-export const Navbar: React.FC = () => {
+export const Navbar = () => {
   const { cartCount, setIsOpen } = useCart();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -17,18 +17,25 @@ export const Navbar: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-pink-100 font-sans transition-all">
+    <>
+      <div className="bg-brand-dark text-white text-center py-2 px-4 text-[11px] font-bold tracking-wider uppercase">
+        🔔 Atenção: Todos os nossos bolos são feitos exclusivamente Sob Encomenda
+      </div>
+      <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-pink-100 font-sans transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="flex flex-col">
-              <span className="font-serif text-2xl font-bold tracking-tight text-brand-dark hover:text-brand-primary transition-colors">
-                Gil Bolos e Doces
-              </span>
-              <span className="text-[10px] tracking-widest uppercase font-semibold text-brand-gold -mt-1 pl-0.5">
-                Confeitaria Artesanal
-              </span>
+            <Link to="/" className="flex items-center gap-2.5">
+              <img src="/logo.png" alt="Gil Bolos e Doces" className="w-12 h-12 object-contain" />
+              <div className="flex flex-col">
+                <span className="font-serif text-xl font-bold tracking-tight text-brand-dark hover:text-brand-primary transition-colors leading-none">
+                  Gil Bolos e Doces
+                </span>
+                <span className="text-[9px] tracking-widest uppercase font-semibold text-brand-gold mt-1 pl-0.5">
+                  Confeitaria Artesanal
+                </span>
+              </div>
             </Link>
           </div>
 
@@ -97,5 +104,6 @@ export const Navbar: React.FC = () => {
         </div>
       )}
     </nav>
+    </>
   );
 };

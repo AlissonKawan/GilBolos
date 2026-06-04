@@ -14,6 +14,7 @@ export const Menu = () => {
   const [cobertura, setCobertura] = useState('Chantilly Tradicional');
   const [decoracao, setDecoracao] = useState('Morangos Frescos');
   const [quantity, setQuantity] = useState(1);
+  const isFatia = sizeOption.name.includes('Fatia');
 
   // Available options
   const massas = ['Branca (Baunilha)', 'Cacau (Chocolate)', 'Red Velvet (Aveludada)'];
@@ -55,8 +56,10 @@ export const Menu = () => {
   };
 
   const handleAddCustomCake = () => {
+    const finalDecoracao = isFatia ? 'Decoração Padrão (Sem personalização no topo)' : decoracao;
+    
     // Format the customization string
-    const customizationString = `${sizeOption.name} (Massa: ${massa}, Recheio: ${recheios.join(' & ')}, Cobertura: ${cobertura}, Decoração: ${decoracao})`;
+    const customizationString = `${sizeOption.name} (Massa: ${massa}, Recheio: ${recheios.join(' & ')}, Cobertura: ${cobertura}, Decoração: ${finalDecoracao})`;
     
     // Add to cart
     addToCart(baseProduct, customizationString, quantity);
@@ -250,25 +253,31 @@ export const Menu = () => {
               {/* STEP 5: DECORAÇÃO */}
               <div className="space-y-3">
                 <span className="block text-xs font-bold uppercase tracking-wider text-stone-500">
-                  Passo 5: Adicionais & Decorações do Topo
+                  Passo 5: Adicionais & Decorações do Topo {isFatia && <span className="text-rose-500 font-semibold normal-case">(Indisponível para Fatias)</span>}
                 </span>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {decoracoes.map((d) => (
-                    <button
-                      key={d}
-                      type="button"
-                      onClick={() => setDecoracao(d)}
-                      className={`p-3 text-center border rounded-xl text-xs font-semibold tracking-wide transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                        decoracao === d
-                          ? 'border-brand-primary bg-brand-accent/40 text-brand-dark'
-                          : 'border-stone-200 hover:border-pink-200 text-stone-650'
-                      }`}
-                    >
-                      {decoracao === d && <Check className="w-3.5 h-3.5 text-brand-primary shrink-0" />}
-                      <span>{d}</span>
-                    </button>
-                  ))}
-                </div>
+                {isFatia ? (
+                  <div className="p-4 bg-stone-100 rounded-xl border border-stone-200/60 text-xs text-stone-500 leading-normal">
+                    ℹ️ Fatias individuais possuem acabamento e decoração padrão da confeitaria (conforme disponibilidade do dia) e <strong>não podem ser personalizadas com adicionais ou decorações no topo</strong>.
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {decoracoes.map((d) => (
+                      <button
+                        key={d}
+                        type="button"
+                        onClick={() => setDecoracao(d)}
+                        className={`p-3 text-center border rounded-xl text-xs font-semibold tracking-wide transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                          decoracao === d
+                            ? 'border-brand-primary bg-brand-accent/40 text-brand-dark'
+                            : 'border-stone-200 hover:border-pink-200 text-stone-650'
+                        }`}
+                      >
+                        {decoracao === d && <Check className="w-3.5 h-3.5 text-brand-primary shrink-0" />}
+                        <span>{d}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
             </div>
@@ -299,7 +308,7 @@ export const Menu = () => {
                 </div>
                 <div>
                   <span className="font-bold text-stone-850 block">Decoração:</span>
-                  <span>{decoracao}</span>
+                  <span>{isFatia ? 'Padrão da Confeitaria' : decoracao}</span>
                 </div>
               </div>
 
