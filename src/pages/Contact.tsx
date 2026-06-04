@@ -25,10 +25,10 @@ export const Contact: React.FC = () => {
     message += `👤 *Nome:* ${formData.name}\n`;
     message += `📞 *WhatsApp:* ${formData.phone}\n`;
     message += `📅 *Data do Evento:* ${formData.date ? new Date(formData.date).toLocaleDateString('pt-BR') : 'A definir'}\n`;
-    message += `🎂 *Tipo de Evento:* ${
-      formData.eventType === 'aniversario' ? 'Aniversário' :
-      formData.eventType === 'casamento' ? 'Casamento / Bodas' :
-      formData.eventType === 'corporativo' ? 'Corporativo' : 'Outros'
+    message += `🎂 *Tipo de Encomenda:* ${
+      formData.eventType === 'aniversario' ? 'Bolo de Aniversário' :
+      formData.eventType === 'casamento' ? 'Bolo de Casamento / Bodas' :
+      formData.eventType === 'festa' ? 'Bolo Festivo Geral' : 'Fatias de Bolo'
     }\n`;
     message += `📝 *Detalhes/Desejos:* ${formData.details || 'Sem especificações adicionais'}\n`;
 
@@ -181,9 +181,9 @@ export const Contact: React.FC = () => {
                     className="w-full bg-stone-50 hover:bg-stone-100/50 focus:bg-white text-stone-800 text-sm px-4 py-2.5 rounded-xl border border-stone-200 focus:border-brand-primary focus:outline-none transition-all"
                   >
                     <option value="aniversario">Bolo de Aniversário</option>
-                    <option value="casamento">Bolo de Casamento</option>
-                    <option value="corporativo">Evento Corporativo</option>
-                    <option value="outros">Docinhos / Outros</option>
+                    <option value="casamento">Bolo de Casamento / Bodas</option>
+                    <option value="festa">Bolo Festivo Geral</option>
+                    <option value="fatias">Fatias de Bolo (Encomenda)</option>
                   </select>
                 </div>
               </div>

@@ -2,29 +2,15 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { products } from '../data/products';
 import { useCart } from '../context/CartContext';
-import { Search, ShoppingBag, SlidersHorizontal } from 'lucide-react';
+import { Search, ShoppingBag, Info, Cake } from 'lucide-react';
 
 export const Menu = () => {
   const { addToCart } = useCart();
-  const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const categories = [
-    { id: 'todos', name: 'Todos' },
-    { id: 'bolos', name: 'Bolos' },
-    { id: 'doces', name: 'Docinhos' },
-    { id: 'cupcakes', name: 'Cupcakes' },
-    { id: 'festivos', name: 'Especiais de Festa' },
-  ];
-
   const filteredProducts = products.filter((product) => {
-    const matchesCategory =
-      selectedCategory === 'todos' || product.category === selectedCategory;
-    const matchesSearch = product.name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase()) ||
+    return product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
   });
 
   return (
@@ -37,59 +23,64 @@ export const Menu = () => {
             Nosso Cardápio
           </h1>
           <p className="text-stone-500 text-sm leading-relaxed">
-            Navegue por nossas delícias artesanais. Escolha seus itens preferidos e monte sua sacola de encomendas.
+            Navegue por nossas delícias artesanais. Escolha seus sabores favoritos e faça sua encomenda em quilos ou fatias.
           </p>
         </div>
 
-        {/* Filter and Search Bar */}
-        <div className="bg-white p-6 rounded-2xl border border-stone-100 shadow-xs mb-10 flex flex-col md:flex-row gap-6 justify-between items-center">
-          
-          {/* Categories Filter */}
-          <div className="flex flex-wrap gap-2.5 w-full md:w-auto">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-4.5 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all ${
-                  selectedCategory === category.id
-                    ? 'bg-brand-primary text-white shadow-sm'
-                    : 'bg-stone-100 hover:bg-pink-100/50 text-stone-600 hover:text-brand-primary'
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
+        {/* Pricing Rules Information Banner */}
+        <div className="bg-gradient-to-r from-pink-500/10 to-brand-primary/10 border border-brand-primary/20 rounded-3xl p-6 md:p-8 mb-10 flex flex-col md:flex-row items-center gap-6 shadow-sm">
+          <div className="p-4 bg-brand-primary/15 text-brand-primary rounded-2xl shrink-0">
+            <Cake className="w-10 h-10" />
+          </div>
+          <div className="space-y-2 text-center md:text-left flex-1">
+            <h2 className="font-serif text-xl font-bold text-brand-dark">Como funcionam as nossas encomendas:</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+              <div className="bg-white/80 p-3.5 rounded-xl border border-pink-100/50">
+                <span className="font-bold text-brand-primary text-sm">🎂 Bolos Inteiros</span>
+                <p className="text-xs text-stone-600 mt-1 leading-normal">
+                  Vendidos sob encomenda a partir de <strong>1.0 kg</strong>. O valor é fixado em <strong>R$ 100,00 por quilo</strong>.
+                </p>
+              </div>
+              <div className="bg-white/80 p-3.5 rounded-xl border border-pink-100/50">
+                <span className="font-bold text-brand-primary text-sm">🍰 Fatias Avulsas</span>
+                <p className="text-xs text-stone-600 mt-1 leading-normal">
+                  Deseja apenas um pedaço? Vendemos fatias individuais de qualquer sabor do cardápio por <strong>R$ 13,00 cada</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Search Bar */}
+        <div className="bg-white p-6 rounded-2xl border border-stone-100 shadow-xs mb-10 flex justify-between items-center">
+          <div className="text-stone-700 font-medium text-sm">
+            Mostrando todos os {filteredProducts.length} bolos disponíveis
           </div>
 
-          {/* Search Box */}
-          <div className="relative w-full md:w-72">
+          <div className="relative w-full max-w-xs">
             <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
               <Search className="w-4 h-4" />
             </span>
             <input
               type="text"
-              placeholder="Buscar doce ou bolo..."
+              placeholder="Buscar sabor de bolo..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-stone-50 hover:bg-stone-100/50 focus:bg-white text-stone-800 text-sm pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 focus:border-brand-primary focus:outline-none transition-all"
             />
           </div>
-
         </div>
 
         {/* Products Grid */}
         {filteredProducts.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-2xl border border-stone-100 text-stone-400 space-y-4">
-            <SlidersHorizontal className="w-12 h-12 stroke-1 mx-auto text-stone-300" />
-            <p className="font-medium">Nenhum doce encontrado para os filtros selecionados.</p>
+            <Info className="w-12 h-12 stroke-1 mx-auto text-stone-300" />
+            <p className="font-medium">Nenhum bolo encontrado para a sua busca.</p>
             <button
-              onClick={() => {
-                setSelectedCategory('todos');
-                setSearchQuery('');
-              }}
+              onClick={() => setSearchQuery('')}
               className="text-brand-primary font-semibold hover:underline text-sm"
             >
-              Limpar filtros
+              Limpar busca
             </button>
           </div>
         ) : (
@@ -106,17 +97,15 @@ export const Menu = () => {
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                   />
-                  {product.category === 'bolos' && (
-                    <span className="absolute bottom-4 left-4 bg-amber-500 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-md shadow-xs">
-                      Sob Medida
-                    </span>
-                  )}
+                  <span className="absolute top-4 left-4 bg-brand-primary text-white text-[10px] font-bold uppercase px-2.5 py-1 rounded-md shadow-xs">
+                    Em Quilo ou Fatia
+                  </span>
                 </div>
 
                 {/* Content */}
                 <div className="p-6 flex-1 flex flex-col">
                   <span className="text-[10px] font-bold text-pink-400 uppercase tracking-widest mb-1.5 block">
-                    {product.category === 'bolos' ? 'Bolo' : product.category === 'doces' ? 'Doce Fino' : product.category}
+                    Bolo Especial
                   </span>
                   <h3 className="text-xl font-serif font-bold text-stone-850 mb-2 group-hover:text-brand-primary transition-colors">
                     {product.name}
@@ -128,8 +117,8 @@ export const Menu = () => {
                   {/* Pricing and Action buttons */}
                   <div className="mt-auto pt-4 border-t border-stone-50 flex items-center justify-between">
                     <div>
-                      <span className="text-xs text-stone-400 block tracking-wider uppercase">Preço base</span>
-                      <span className="text-lg font-bold text-brand-dark">R$ {product.price.toFixed(2)}</span>
+                      <span className="text-xs text-stone-400 block tracking-wider uppercase">Fatia a partir de</span>
+                      <span className="text-lg font-bold text-brand-dark">R$ {product.sizes[0].price.toFixed(2)}</span>
                     </div>
                     <div className="flex gap-2">
                       <Link

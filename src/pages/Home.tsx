@@ -1,14 +1,13 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { products } from '../data/products';
 import { useCart } from '../context/CartContext';
-import { Award, ShieldCheck, HeartHandshake, Star, ArrowRight, ShoppingBag } from 'lucide-react';
+import { Award, ShieldCheck, HeartHandshake, Star, ArrowRight, ShoppingBag, Cake } from 'lucide-react';
 
-export const Home: React.FC = () => {
+export const Home = () => {
   const { addToCart } = useCart();
   
-  // Highlight first 3 products as featured
-  const featuredProducts = products.slice(0, 3);
+  // Showcase all available cakes
+  const featuredProducts = products;
 
   const testimonials = [
     {
@@ -19,8 +18,8 @@ export const Home: React.FC = () => {
     },
     {
       name: 'Carlos Oliveira',
-      role: 'Noivo',
-      text: 'Encomendamos o bolo de casamento e os docinhos finos. A entrega foi pontualíssima e o visual do bolo rústico superou nossas expectativas. Os brigadeiros belgas sumiram da mesa em minutos!',
+      role: 'Casamento',
+      text: 'Encomendamos o Naked Cake rústico para o nosso casamento. O visual estava simplesmente impecável e o recheio de damasco com ganache de chocolate branco foi muito elogiado por todos!',
       rating: 5,
     },
   ];
@@ -33,27 +32,27 @@ export const Home: React.FC = () => {
           {/* Hero Left Text */}
           <div className="space-y-6 md:space-y-8 text-center md:text-left animate-fade-in">
             <span className="inline-block bg-pink-100 text-brand-primary text-xs font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">
-              Feito com Amor e Carinho 💖
+              Feito com Amor e Carinho 🎂
             </span>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-dark leading-tight">
-              Momentos especiais merecem <span className="text-brand-primary italic">doces inesquecíveis</span>.
+              Sua vida com mais sabor e <span className="text-brand-primary italic">bolos incríveis</span>.
             </h1>
             <p className="text-stone-600 text-base sm:text-lg leading-relaxed max-w-lg mx-auto md:mx-0">
-              Na Gil Bolos e Doces, criamos bolos e doces artesanais personalizados para festas, casamentos ou aquele café da tarde especial. Conheça nosso cardápio e faça sua encomenda!
+              Na Gil Bolos e Doces, somos especialistas em bolos artesanais artísticos e fatias gourmet. Bolos sob encomenda a partir de 1 kg (apenas R$ 100/kg) e fatias deliciosas por R$ 13.
             </p>
             <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
               <Link
                 to="/cardapio"
                 className="bg-brand-primary hover:bg-brand-secondary text-white font-semibold py-3.5 px-8 rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all duration-200"
               >
-                <span>Ver Cardápio</span>
+                <span>Ver Cardápio de Bolos</span>
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
                 to="/contato"
                 className="bg-white hover:bg-stone-50 text-stone-700 font-semibold py-3.5 px-8 rounded-xl border border-stone-200 hover:border-pink-200 text-center transition-all duration-200"
               >
-                Encomendas Customizadas
+                Orçamentos Personalizados
               </Link>
             </div>
           </div>
@@ -64,9 +63,39 @@ export const Home: React.FC = () => {
             <div className="absolute -inset-4 bg-pink-200/40 rounded-full blur-2xl -z-10" />
             <img
               src="/images/strawberry_cake.png"
-              alt="Bolo de Morango Gourmet Gil Bolos e Doces"
+              alt="Bolo Gourmet Gil Bolos e Doces"
               className="w-full max-w-md h-[400px] object-cover rounded-3xl shadow-2xl border-4 border-white transform hover:scale-[1.02] transition-transform duration-300"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Rule Info Highlight */}
+      <section className="bg-white py-8 border-b border-stone-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-stone-50 rounded-2xl border border-stone-100 p-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-4 text-left">
+              <div className="p-3 bg-pink-100 text-brand-primary rounded-xl shrink-0">
+                <Cake className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-serif font-bold text-stone-850 text-lg">Regras de Preços da Confeitaria</h3>
+                <p className="text-xs text-stone-500 mt-0.5">Bolos de qualidade com preço justo para suas comemorações.</p>
+              </div>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-6 w-full md:w-auto">
+              <div className="bg-white py-3 px-6 rounded-xl border border-pink-100/50 flex-1 text-center md:text-left min-w-[200px]">
+                <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider block">Bolos Sob Encomenda</span>
+                <span className="text-lg font-bold text-brand-primary">R$ 100,00 / kg</span>
+                <span className="text-[10px] text-stone-500 block mt-0.5">* Pedido mínimo a partir de 1.0 kg</span>
+              </div>
+              <div className="bg-white py-3 px-6 rounded-xl border border-pink-100/50 flex-1 text-center md:text-left min-w-[200px]">
+                <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider block">Fatias Individuais</span>
+                <span className="text-lg font-bold text-brand-primary">R$ 13,00 / fatia</span>
+                <span className="text-[10px] text-stone-500 block mt-0.5">* Qualquer sabor do cardápio</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -76,10 +105,10 @@ export const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-xl mx-auto mb-12">
             <h2 className="font-serif text-3xl font-bold text-brand-dark mb-4">
-              Nosso Segredo é o Afeto
+              O Melhor Bolo para a sua Festa
             </h2>
             <p className="text-stone-500 text-sm">
-              Cada pedido é preparado de forma única, garantindo a máxima qualidade em cada detalhe.
+              Cada bolo é preparado com ingredientes frescos de altíssima qualidade e design refinado.
             </p>
           </div>
 
@@ -89,9 +118,9 @@ export const Home: React.FC = () => {
               <div className="inline-flex p-3.5 bg-pink-100 text-brand-primary rounded-xl">
                 <Award className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-serif font-bold text-brand-dark">Ingredientes Nobres</h3>
+              <h3 className="text-lg font-serif font-bold text-brand-dark">Massas & Recheios Nobres</h3>
               <p className="text-stone-600 text-sm leading-relaxed">
-                Utilizamos chocolates nobres, frutas frescas da estação e insumos selecionados para que cada fatia seja divina.
+                Utilizamos chocolates nobres, frutas frescas selecionadas e receitas balanceadas para que cada fatia seja divina.
               </p>
             </div>
 
@@ -100,9 +129,9 @@ export const Home: React.FC = () => {
               <div className="inline-flex p-3.5 bg-pink-100 text-brand-primary rounded-xl">
                 <HeartHandshake className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-serif font-bold text-brand-dark">Receitas de Família</h3>
+              <h3 className="text-lg font-serif font-bold text-brand-dark">Receita Caseira</h3>
               <p className="text-stone-600 text-sm leading-relaxed">
-                Nosso diferencial é o toque caseiro e o sabor equilibrado, livre de conservantes e excesso de açúcar.
+                Nossos bolos têm o sabor equilibrado da verdadeira confeitaria artesanal, sem conservantes ou excesso de doçura.
               </p>
             </div>
 
@@ -111,9 +140,9 @@ export const Home: React.FC = () => {
               <div className="inline-flex p-3.5 bg-pink-100 text-brand-primary rounded-xl">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-serif font-bold text-brand-dark">100% Personalizado</h3>
+              <h3 className="text-lg font-serif font-bold text-brand-dark">Montagem do Seu Jeito</h3>
               <p className="text-stone-600 text-sm leading-relaxed">
-                Você escolhe a massa, recheio e decoração do seu bolo. Nós fazemos seu bolo de sonhos virar realidade.
+                Oferecemos a flexibilidade de encomendar o peso exato de acordo com seus convidados (a partir de 1kg) ou fatias prontas.
               </p>
             </div>
           </div>
@@ -126,10 +155,10 @@ export const Home: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-4">
             <div className="text-center sm:text-left">
               <h2 className="font-serif text-3xl font-bold text-brand-dark mb-2">
-                Os Queridinhos da Confeitaria
+                Nossos Bolos Especiais
               </h2>
               <p className="text-stone-500 text-sm">
-                Os itens mais pedidos e elogiados pelos nossos clientes.
+                Sabores marcantes preparados com muito carinho para adoçar sua vida.
               </p>
             </div>
             <Link
@@ -155,7 +184,7 @@ export const Home: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4 bg-brand-primary text-white text-[11px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-md shadow-sm">
-                    Destaque
+                    Bolos
                   </div>
                 </div>
 
@@ -171,8 +200,8 @@ export const Home: React.FC = () => {
                   {/* Price & Action */}
                   <div className="mt-auto pt-4 border-t border-stone-50 flex items-center justify-between">
                     <div>
-                      <span className="text-xs text-stone-400 block uppercase tracking-wider">A partir de</span>
-                      <span className="text-lg font-bold text-brand-dark">R$ {product.price.toFixed(2)}</span>
+                      <span className="text-xs text-stone-400 block uppercase tracking-wider">Fatia</span>
+                      <span className="text-lg font-bold text-brand-dark">R$ {product.sizes[0].price.toFixed(2)}</span>
                     </div>
                     <div className="flex gap-2">
                       <Link
@@ -241,17 +270,17 @@ export const Home: React.FC = () => {
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative space-y-6 md:space-y-8">
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-            Quer um bolo personalizado para o seu evento?
+            Quer encomendar um bolo personalizado para o seu evento?
           </h2>
           <p className="text-stone-300 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
-            Montamos bolos de andares, doces decorados e lembrancinhas gourmet sob medida. Fale conosco pelo WhatsApp, descreva o que precisa e enviamos um orçamento sem compromisso.
+            Montamos bolos artísticos de andares, bolos temáticos decorados e fatias customizadas sob medida. Fale conosco pelo WhatsApp, descreva o seu desejo e enviamos o orçamento.
           </p>
           <div className="pt-2">
             <Link
               to="/contato"
               className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-secondary text-white font-semibold py-3.5 px-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
             >
-              <span>Fazer Orçamento / Contato</span>
+              <span>Solicitar Orçamento de Bolo</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
