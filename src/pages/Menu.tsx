@@ -17,15 +17,34 @@ export const Menu = () => {
   const [quantity, setQuantity] = useState(1);
   const isFatia = sizeOption.name.includes('Fatia');
 
+  const simpleProduct = products.find((p) => p.id === 'bolo-simples') || products[0];
+
+  // State for simple cake ordering
+  const [simpleFlavor, setSimpleFlavor] = useState('Cenoura');
+  const [simpleOption, setSimpleOption] = useState(simpleProduct.sizes[0]);
+  const [simpleQuantity, setSimpleQuantity] = useState(1);
+
+  const handleAddSimpleCake = () => {
+    const selectionString = `${simpleOption.name} (Sabor: ${simpleFlavor})`;
+    addToCart(simpleProduct, selectionString, simpleQuantity);
+  };
+
   // Available options
   const massas = ['Branca (Baunilha)', 'Cacau (Chocolate)', 'Red Velvet (Aveludada)'];
   const recheiosDisponiveis = [
-    'Creme de Leite Ninho',
-    'Brigadeiro Gourmet Belga',
-    'Geleia Artesanal de Morango',
-    'Ganache de Chocolate Branco',
-    'Geleia de Damasco',
-    'Doce de Leite Cremoso'
+    'Brigadeiro',
+    'Brigadeiro com Morango',
+    'Leite Ninho',
+    'Leite Ninho com Morango',
+    'Brigadeiro com Leite Ninho',
+    'Creme Belga com Abacaxi e Doce de Leite',
+    'Doce de Leite',
+    'Doce de Leite com Ameixa',
+    'Doce de Leite com Coco',
+    'Prestígio',
+    'Ninho com Creme de Avelã',
+    'Brigadeiro / Prestígio',
+    'Brigadeiro Trufado com Chocolate'
   ];
   const coberturas = [
     'Chantilly Tradicional',
@@ -130,7 +149,152 @@ export const Menu = () => {
           </div>
         </section>
 
-        {/* 2. CUSTOM CAKE BUILDER FORM */}
+        {/* 2. BOLOS CASEIROS SIMPLES */}
+        <section className="mb-20">
+          <ScrollReveal className="flex items-center gap-3 mb-8 justify-center">
+            <Cake className="w-6 h-6 text-brand-primary shrink-0" />
+            <h2 className="font-serif text-2xl md:text-3xl font-bold text-brand-dark">
+              Bolos Caseiros Simples (Estilo Bolo da Vovó)
+            </h2>
+          </ScrollReveal>
+
+          <ScrollReveal delay={100}>
+            <div className="bg-white rounded-3xl border border-stone-100 shadow-sm p-6 md:p-10 lg:p-12">
+              <div className="flex flex-col lg:flex-row gap-12 items-center">
+                
+                {/* Left Side: Dynamic Image */}
+                <div className="w-full lg:w-96 shrink-0 relative">
+                  <div className="h-80 overflow-hidden rounded-2xl border border-stone-100 shadow-md">
+                    <img
+                      src={
+                        simpleOption.name.includes('com Cobertura') || simpleOption.name.includes('Com Cobertura')
+                          ? '/images/portfolio/bolo_simples_cobertura.jpg'
+                          : '/images/portfolio/bolo_simples.png'
+                      }
+                      alt="Bolo Caseiro"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-4 left-4 bg-brand-primary text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-md">
+                      A partir de R$ 35,00
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Side: Options and Ordering */}
+                <div className="flex-1 space-y-6 text-left w-full">
+                  <div>
+                    <h3 className="font-serif text-2xl font-bold text-brand-dark">
+                      Bolo Caseiro da Vovó
+                    </h3>
+                    <p className="text-stone-500 text-sm mt-2 leading-relaxed">
+                      Nossos tradicionais bolos caseiros simples são fofinhos e assados na hora. Perfeitos para o café da tarde ou da manhã! Escolha o sabor que deseja e opte por levar simples ou com uma generosa cobertura vulcão.
+                    </p>
+                  </div>
+
+                  {/* Option 1: Flavor selection */}
+                  <div className="space-y-3">
+                    <span className="block text-xs font-bold uppercase tracking-wider text-stone-500">
+                      Sabor do Bolo:
+                    </span>
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+                      {['Cenoura', 'Chocolate', 'Milho', 'Laranja', 'Mesclado'].map((flavor) => (
+                        <button
+                          key={flavor}
+                          type="button"
+                          onClick={() => setSimpleFlavor(flavor)}
+                          className={`py-2.5 px-2 text-center border rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                            simpleFlavor === flavor
+                              ? 'border-brand-primary bg-brand-accent/50 text-brand-dark font-bold'
+                              : 'border-stone-200 hover:border-pink-200 text-stone-600 hover:bg-stone-50/50'
+                          }`}
+                        >
+                          {flavor}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Option 2: Type (With or Without Coverage) */}
+                  <div className="space-y-3">
+                    <span className="block text-xs font-bold uppercase tracking-wider text-stone-500">
+                      Opção de Cobertura:
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {simpleProduct.sizes.map((size) => (
+                        <button
+                          key={size.name}
+                          type="button"
+                          onClick={() => setSimpleOption(size)}
+                          className={`p-4 text-left border rounded-2xl transition-all flex justify-between items-center cursor-pointer ${
+                            simpleOption.name === size.name
+                              ? 'border-brand-primary bg-brand-accent/40 text-brand-dark font-semibold'
+                              : 'border-stone-200 hover:border-pink-200 text-stone-650 hover:bg-stone-50/50'
+                          }`}
+                        >
+                          <div>
+                            <div className="text-xs font-bold">{size.name}</div>
+                            <div className="text-[10px] text-stone-400 mt-0.5">
+                              {size.name.includes('Cobertura') ? 'Com calda vulcão cremosa' : 'Tradicional sem cobertura'}
+                            </div>
+                          </div>
+                          <div className="text-brand-primary font-bold text-base shrink-0">R$ {size.price.toFixed(2)}</div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Bottom: Quantity, Price, Add Button */}
+                  <div className="pt-6 border-t border-stone-100 flex flex-col sm:flex-row gap-6 items-center justify-between">
+                    {/* Price and Quantity */}
+                    <div className="flex items-center gap-6 justify-between w-full sm:w-auto">
+                      <div>
+                        <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider block">Quantidade:</span>
+                        <div className="flex items-center border border-stone-200 rounded-lg overflow-hidden bg-white mt-1.5 max-w-[110px]">
+                          <button
+                            type="button"
+                            onClick={() => setSimpleQuantity(Math.max(1, simpleQuantity - 1))}
+                            className="px-2.5 py-1.5 hover:bg-stone-100 text-stone-600 font-bold transition-colors cursor-pointer"
+                          >
+                            -
+                          </button>
+                          <span className="px-3 text-xs font-semibold text-stone-800 text-center flex-1">{simpleQuantity}</span>
+                          <button
+                            type="button"
+                            onClick={() => setSimpleQuantity(simpleQuantity + 1)}
+                            className="px-2.5 py-1.5 hover:bg-stone-100 text-stone-600 font-bold transition-colors cursor-pointer"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="text-right sm:text-left">
+                        <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider block">Valor Estimado:</span>
+                        <span className="text-2xl font-bold text-brand-dark mt-1 block">
+                          R$ {(simpleOption.price * simpleQuantity).toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Action Button */}
+                    <button
+                      type="button"
+                      onClick={handleAddSimpleCake}
+                      className="w-full sm:w-auto bg-brand-primary hover:bg-brand-secondary text-white font-semibold py-3.5 px-8 rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
+                    >
+                      <ShoppingBag className="w-5 h-5" />
+                      <span>Adicionar à Sacola</span>
+                    </button>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </ScrollReveal>
+        </section>
+
+        {/* 3. CUSTOM CAKE BUILDER FORM */}
         <ScrollReveal id="monte-seu-bolo" className="bg-white rounded-3xl border border-stone-100 shadow-sm p-6 md:p-10 lg:p-12 mb-12 block">
           
           <div className="flex flex-col lg:flex-row gap-12">

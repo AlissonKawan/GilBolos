@@ -40,6 +40,20 @@ export const products: Product[] = [
       { name: 'Bolo Inteiro - 2.0 kg (aprox. 18 a 20 fatias)', price: 200.00 },
       { name: 'Bolo Inteiro - 3.0 kg (aprox. 28 a 30 fatias)', price: 300.00 }
     ]
+  },
+  {
+    id: 'bolo-simples',
+    name: 'Bolo Simples (Estilo Caseiro)',
+    category: 'bolos',
+    description: 'Bolo simples artesanal a partir de R$ 35 (ou R$ 45 com cobertura vulcão).',
+    longDescription: 'Nossos bolos caseiros tradicionais são fofinhos e assados na hora. Disponíveis em sabores como Cenoura, Chocolate, Milho, Laranja e Mesclado, com a opção tradicional sem cobertura ou com uma deliciosa e generosa cobertura cremosa vulcão.',
+    price: 35.00,
+    image: '/images/portfolio/bolo_simples.png',
+    ingredients: ['Ovos', 'Farinha de Trigo', 'Leite', 'Manteiga', 'Fermento', 'Açúcar'],
+    sizes: [
+      { name: 'Bolo Simples (Sem Cobertura)', price: 35.00 },
+      { name: 'Bolo com Cobertura (Vulcão)', price: 45.00 }
+    ]
   }
 ];
 
@@ -134,5 +148,17 @@ export const portfolioItems: PortfolioItem[] = [
     name: 'Bolo Retangular de Chocolate com Morango',
     description: 'Bolo retangular com cobertura de chantilly de chocolate trabalhado nas laterais, topo de raspas de chocolate e morangos.',
     image: '/images/portfolio/bolo_retangular_morangos.jpg'
+  },
+  {
+    id: 'p16',
+    name: 'Bolo Caseiro Simples (Sem Cobertura)',
+    description: 'Bolo caseiro tradicional super fofinho e dourado, assado na hora, ideal para o café.',
+    image: '/images/portfolio/bolo_simples.png'
+  },
+  {
+    id: 'p17',
+    name: 'Bolo Caseiro com Cobertura de Doce de Leite / Paçoca',
+    description: 'Bolo caseiro coberto com uma generosa camada de calda vulcão de doce de leite cremoso e paçoca esfarelada.',
+    image: '/images/portfolio/bolo_simples_cobertura.jpg'
   }
 ];

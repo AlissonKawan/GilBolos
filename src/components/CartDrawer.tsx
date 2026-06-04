@@ -12,7 +12,7 @@ export const CartDrawer: React.FC = () => {
     let message = 'Olá! Gostaria de encomendar os seguintes itens da *Gil Bolos e Doces*:\n\n';
 
     cartItems.forEach((item) => {
-      const sizeOpt = item.product.sizes.find((s) => s.name === item.selectedSize);
+      const sizeOpt = item.product.sizes.find((s) => item.selectedSize.startsWith(s.name));
       const itemPrice = sizeOpt ? sizeOpt.price : item.product.price;
       message += `🍰 *${item.product.name}*\n`;
       message += `   - Quantidade: ${item.quantity}\n`;
@@ -83,7 +83,7 @@ export const CartDrawer: React.FC = () => {
                     </h4>
                     <p className="text-xs text-stone-500 mt-0.5">Opção: {item.selectedSize}</p>
                     <p className="text-sm font-semibold text-brand-primary mt-1">
-                      R$ {(item.product.sizes.find(s => s.name === item.selectedSize)?.price ?? item.product.price).toFixed(2)}
+                      R$ {(item.product.sizes.find(s => item.selectedSize.startsWith(s.name))?.price ?? item.product.price).toFixed(2)}
                     </p>
 
                     <div className="flex items-center justify-between mt-3">

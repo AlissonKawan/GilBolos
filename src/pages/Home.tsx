@@ -85,16 +85,21 @@ export const Home = () => {
                 </div>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-6 w-full md:w-auto">
-                <div className="bg-white py-3 px-6 rounded-xl border border-pink-100/50 flex-1 text-center md:text-left min-w-[200px]">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:w-auto">
+                <div className="bg-white py-3 px-6 rounded-xl border border-pink-100/50 text-center md:text-left min-w-[180px]">
                   <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider block">Bolos Sob Encomenda</span>
                   <span className="text-lg font-bold text-brand-primary">R$ 100,00 / kg</span>
-                  <span className="text-[10px] text-stone-500 block mt-0.5">* Pedido mínimo a partir de 1.0 kg</span>
+                  <span className="text-[10px] text-stone-500 block mt-0.5">* Mínimo a partir de 1.0 kg</span>
                 </div>
-                <div className="bg-white py-3 px-6 rounded-xl border border-pink-100/50 flex-1 text-center md:text-left min-w-[200px]">
+                <div className="bg-white py-3 px-6 rounded-xl border border-pink-100/50 text-center md:text-left min-w-[180px]">
+                  <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider block">Bolos Caseiros Simples</span>
+                  <span className="text-lg font-bold text-brand-primary">A partir de R$ 35,00</span>
+                  <span className="text-[10px] text-stone-500 block mt-0.5">* R$ 35 simples / R$ 45 com cobertura</span>
+                </div>
+                <div className="bg-white py-3 px-6 rounded-xl border border-pink-100/50 text-center md:text-left min-w-[180px]">
                   <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider block">Fatias Individuais</span>
                   <span className="text-lg font-bold text-brand-primary">R$ 13,00 / fatia</span>
-                  <span className="text-[10px] text-stone-500 block mt-0.5">* Qualquer sabor do cardápio</span>
+                  <span className="text-[10px] text-stone-500 block mt-0.5">* Acabamento padrão da casa</span>
                 </div>
               </div>
             </div>
