@@ -1,12 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { products, portfolioItems } from '../data/products';
 import { useCart } from '../context/CartContext';
-import { Cake, Sparkles, Check, ShoppingBag, Eye } from 'lucide-react';
+import { Cake, Sparkles, Check, ShoppingBag, Eye, ArrowDown } from 'lucide-react';
 import { ScrollReveal } from '../components/ScrollReveal';
 
 export const Menu = () => {
   const { addToCart } = useCart();
   const baseProduct = products[0]; // Bolo Personalizado
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      const element = document.getElementById(targetId);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+  }, []);
 
   // State for the cake configurator
   const [sizeOption, setSizeOption] = useState(baseProduct.sizes[0]); // Default to Fatia
@@ -99,13 +111,41 @@ export const Menu = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Header */}
-        <ScrollReveal className="text-center max-w-xl mx-auto mb-12">
+        <ScrollReveal className="text-center max-w-xl mx-auto mb-10">
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-dark mb-4">
             Nosso Cardápio Interativo
           </h1>
           <p className="text-stone-500 text-sm leading-relaxed">
             Confira as fotos de nossos trabalhos reais e use o configurador exclusivo para montar o bolo dos seus sonhos!
           </p>
+        </ScrollReveal>
+
+        {/* Quick Jump Buttons for user convenience */}
+        <ScrollReveal delay={50} className="flex flex-col sm:flex-row justify-center gap-4 mb-12 max-w-lg mx-auto">
+          <a
+            href="#bolos-caseiros"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('bolos-caseiros')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+            className="flex-1 bg-brand-primary hover:bg-brand-secondary text-white font-semibold py-3.5 px-6 rounded-xl text-center shadow-md text-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Cake className="w-4 h-4 shrink-0" />
+            <span>Ir para Bolo Simples (R$ 35 - 45)</span>
+            <ArrowDown className="w-4 h-4 shrink-0" />
+          </a>
+          <a
+            href="#monte-seu-bolo"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('monte-seu-bolo')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+            className="flex-1 bg-white hover:bg-stone-50 text-stone-700 font-semibold py-3.5 px-6 rounded-xl text-center border border-stone-200 hover:border-pink-200 text-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4 text-brand-primary shrink-0" />
+            <span>Configurar Bolo Decorado</span>
+            <ArrowDown className="w-4 h-4 shrink-0 text-brand-primary" />
+          </a>
         </ScrollReveal>
 
         {/* 1. PORTFOLIO / GALLERY */}
@@ -156,7 +196,7 @@ export const Menu = () => {
         </section>
 
         {/* 2. BOLOS CASEIROS SIMPLES */}
-        <section className="mb-20">
+        <section id="bolos-caseiros" className="mb-20">
           <ScrollReveal className="flex items-center gap-3 mb-8 justify-center">
             <Cake className="w-6 h-6 text-brand-primary shrink-0" />
             <h2 className="font-serif text-2xl md:text-3xl font-bold text-brand-dark">
