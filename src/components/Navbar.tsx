@@ -34,10 +34,10 @@ export const Navbar = () => {
                 className="w-12 h-12 md:w-16 md:h-16 object-contain rounded-full shadow-md border border-pink-100 bg-white hover:scale-105 transition-transform duration-300"
               />
               <div className="flex flex-col text-left">
-                <span className="font-serif text-lg font-bold tracking-tight text-brand-dark hover:text-brand-primary transition-colors leading-none">
+                <span className="font-serif text-sm sm:text-base md:text-lg font-bold tracking-tight text-brand-dark hover:text-brand-primary transition-colors leading-none truncate max-w-[130px] sm:max-w-none">
                   Gil Bolos e Doces
                 </span>
-                <span className="text-[9px] tracking-widest uppercase font-semibold text-brand-gold mt-1 pl-0.5">
+                <span className="text-[8px] sm:text-[9px] tracking-widest uppercase font-semibold text-brand-gold mt-0.5 sm:mt-1 pl-0.5 truncate max-w-[130px] sm:max-w-none">
                   Confeitaria Artesanal
                 </span>
               </div>

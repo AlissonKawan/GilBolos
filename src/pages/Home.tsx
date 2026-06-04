@@ -64,7 +64,7 @@ export const Home = () => {
             <img
               src="/images/portfolio/bolo_coracoes_laco_preto.png"
               alt="Bolo Gourmet Gil Bolos e Doces"
-              className="w-full max-w-md h-[400px] object-cover rounded-3xl shadow-2xl border-4 border-white transform hover:scale-[1.02] transition-transform duration-300 animate-fade-in"
+              className="w-full max-w-md h-[280px] sm:h-[380px] md:h-[400px] object-cover rounded-3xl shadow-2xl border-4 border-white transform hover:scale-[1.02] transition-transform duration-300 animate-fade-in"
             />
           </div>
         </div>
