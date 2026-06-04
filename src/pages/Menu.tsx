@@ -26,7 +26,7 @@ export const Menu = () => {
   const [simpleCoverage, setSimpleCoverage] = useState('Chantily');
 
   const handleAddSimpleCake = () => {
-    const isWithCoverage = simpleOption.name.includes('Com Cobertura') || simpleOption.name.includes('com Cobertura');
+    const isWithCoverage = !simpleOption.name.includes('Sem Cobertura');
     const selectionString = isWithCoverage
       ? `${simpleOption.name} (Sabor: ${simpleFlavor}, Cobertura: ${simpleCoverage})`
       : `${simpleOption.name} (Sabor: ${simpleFlavor})`;
@@ -250,7 +250,7 @@ export const Menu = () => {
                   </div>
 
                   {/* Option 3: Sabor da Cobertura (Apenas se a opção for Com Cobertura) */}
-                  {(simpleOption.name.includes('Cobertura') || simpleOption.name.includes('cobertura')) ? (
+                  {!simpleOption.name.includes('Sem Cobertura') ? (
                     <div className="space-y-3 animate-fade-in">
                       <span className="block text-xs font-bold uppercase tracking-wider text-stone-500">
                         Sabor da Cobertura Vulcão:
