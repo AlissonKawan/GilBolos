@@ -7,6 +7,7 @@ import { Home } from './pages/Home';
 import { Menu } from './pages/Menu';
 import { ProductDetail } from './pages/ProductDetail';
 import { Contact } from './pages/Contact';
+import { About } from './pages/About';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/cardapio" element={<Menu />} />
+              <Route path="/a-boleira" element={<About />} />
               <Route path="/produto/:id" element={<ProductDetail />} />
               <Route path="/contato" element={<Contact />} />
             </Routes>
